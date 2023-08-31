@@ -1,0 +1,42 @@
+{% extends "base.html"   %}
+
+
+
+ {% block content %}
+<table class="table table-borderless">
+ <thead class="border-bottom font-weight-bold">
+  <tr>
+    <td>Full Name</td>
+    <td>Mobile</td>
+    <td>Position</td>
+    <td>
+       
+    </td>
+    
+  </tr>
+ </thead> 
+ 
+ <tbody>
+    
+    {% for X in employee_list %}
+    <tr>
+    <td>{{X.fullname}}</td>
+    <td>{{X.mobile}}</td> 
+    <td>{{X.position}}</td>
+    
+    <td>
+        <a href="{% url 'employee_update' X.id %}" class="btn text-secondary px-0">
+            <button style="background-color: brown; border-radius: 20px;" >edit</button>
+        </a>    
+    
+        <form action="{% url 'employee_delete' X.id %}" method="post">
+            {% csrf_token %}  
+      
+            <button style="background-color: rgb(42, 212, 78); border-radius: 20px;" onclick="return confirm('Are you sure you want to delete this item?');">delete</button>
+        </form>  
+    </td>
+    </tr>
+    {% endfor %}
+ </tbody>
+</table>  
+{% endblock content %}
